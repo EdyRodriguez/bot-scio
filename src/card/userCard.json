@@ -1,0 +1,59 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "If you want update your data if not just select ok or write ok :",
+        "style": "heading"
+      },
+      {
+        "type": "Input.Text",
+        "id": "myName",
+        "label": "Name",
+        "value":"${name}",
+        "isRequired": true,
+        "errorMessage": "This is a required input",
+        "style": "text"
+      },
+      {
+        "type": "Input.Text",
+        "id": "myNumber",
+        "label": "Phone Number",
+        "value":"${number}",
+        "isRequired": true,
+        "errorMessage": "This is a required input",
+        "style": "text"
+      },
+      {
+        "type": "Input.Text",
+        "id": "myAge",
+        "label": "Age",
+        "isRequired": true,
+        "errorMessage": "This is a required input",
+        "value":"${age}",
+        "style": "text"
+      },
+      {
+        "type": "Input.Text",
+        "id": "myVideogame",
+        "value":"${videogame}",
+        "isRequired": true,
+        "errorMessage": "This is a required input",
+        "label": "Videogame",
+        "style": "url"
+      }
+      
+    ],
+    "actions": [
+      {
+        "type": "Action.Submit",
+        "title": "OK",
+        "data": {
+            "send": "send"
+        }
+      }
+    ]
+  }
+  
