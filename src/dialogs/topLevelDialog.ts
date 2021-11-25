@@ -5,6 +5,7 @@ import * as ACData from "adaptivecards-templating";
 import * as AdaptiveCard from "../card/userCard.json";
 import { userInfo } from "../bot";
 import { ConfirmPrompt } from "botbuilder-dialogs";
+import axios from "axios";
 // Licensed under the MIT License.
 export {};
 const { ComponentDialog, NumberPrompt, TextPrompt, WaterfallDialog } = require('botbuilder-dialogs');
@@ -124,8 +125,25 @@ class TopLevelDialog extends ComponentDialog {
     }
     async resume(stepContext) {
         userInfo.Save = stepContext.result;
+        const genre = userInfo.Genders[0];
         if(userInfo.Save){
-            //aqui se hace el desmadre de la base de datos
+            if(userInfo.Genders.length >1){
+                const genre = userInfo.Genders[0]+', '+userInfo.Genders[1];
+            }
+            axios.post('http://localhost:8000/api/users', {
+                name: userInfo.Name,
+                number: String(userInfo.Number),
+                age: String(userInfo.Age),
+                videogame: userInfo.Videogames,
+                genres: genre
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+            
             await stepContext.context.sendActivity(`Your results will be saved`);
             
         }
